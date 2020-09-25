@@ -1,13 +1,23 @@
 <template>
   <v-app>
     <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        Header
-      </div>
+      <v-toolbar-title>Foundation Configurator</v-toolbar-title>
+      <v-spacer />
+      <v-btn disabled icon>
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
     </v-app-bar>
 
-    <v-main>
-      <div>Sample content</div>
+    <v-main class="content">
+      <div class="text-h2 text-center">Coming Soon!</div>
     </v-main>
   </v-app>
 </template>
+
+<style lang="scss" scoped>
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
