@@ -15,7 +15,14 @@
     "typeRoots": ["./node_modules/@types", "./node_modules/vuetify/types"],
     "types": ["webpack-env", "jest", "vuetify"],
     "paths": {
-      "@/*": ["src/*"]
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@config/*": ["src/config/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@store/*": ["src/store/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utilities/*": ["src/utilities/*"],
+      "@views/*": ["src/views/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },

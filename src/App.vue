@@ -1,10 +1,14 @@
 <template>
   <v-app>
+    <TheAppDrawer />
+
     <v-app-bar app color="primary" dark>
-      <v-toolbar-title>Foundation Configurator</v-toolbar-title>
+      <v-toolbar-title class="appbar__title">
+        Foundation Configurator
+      </v-toolbar-title>
       <v-spacer />
-      <v-btn disabled icon>
-        <v-icon>mdi-cog</v-icon>
+      <v-btn disabled icon large>
+        <v-icon>mdi-account-circle</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -19,5 +23,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+</style>
+
+<script lang="ts">
+import Vue from "vue";
+import Component from "vue-class-component";
+
+// Components
+import TheAppDrawer from "@components/single/TheAppDrawer.vue";
+
+@Component({
+  components: {
+    TheAppDrawer,
+  },
+})
+export default class App extends Vue {}
+</script>
+
+<style lang="scss" scoped>
+.appbar__title {
+  font-weight: 300;
 }
 </style>
