@@ -41,6 +41,12 @@
         <span>{{ item.text }}</span>
       </v-tooltip>
     </v-list>
+
+    <template v-slot:append>
+      <div class="drawer__version">
+        {{ versionString }}
+      </div>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -51,12 +57,17 @@ import Component from "vue-class-component";
 // Components
 import DrawerLink from "./DrawerLink.vue";
 
+// Utilities
+import config from "@config";
+
 @Component({
   components: {
     DrawerLink,
   },
 })
 export default class TheAppDrawer extends Vue {
+  version: string = config.version;
+
   menuItems = [
     {
       disabled: false,
@@ -73,6 +84,10 @@ export default class TheAppDrawer extends Vue {
     { disabled: true, icon: "mdi-home", title: "Buildings", url: "/buildings" },
     { disabled: true, icon: "mdi-currency-usd", title: "Trade", url: "/trade" },
   ];
+
+  get versionString(): string {
+    return `v${this.version}`;
+  }
 }
 </script>
 
@@ -86,28 +101,9 @@ export default class TheAppDrawer extends Vue {
   padding: 32px 0;
 }
 
-.list__item {
-  padding-left: 16px !important; // Vuetify override
-
-  i {
-    font-size: 30px;
-  }
-
-  .list__item__indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 5px;
-    content: "";
-    background-color: white;
-    opacity: 0;
-    transition: ease-in-out 0.15s opacity;
-  }
-}
-
-.list__item__icon,
-.list__item__content {
-  align-self: center;
+.drawer__version {
+  padding: 16px;
+  color: white;
+  opacity: 0.8;
 }
 </style>

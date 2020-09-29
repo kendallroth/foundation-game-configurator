@@ -14,10 +14,11 @@
     "baseUrl": ".",
     "typeRoots": ["./node_modules/@types", "./node_modules/vuetify/types"],
     "types": ["webpack-env", "jest", "vuetify"],
+    "resolveJsonModule": true,
     "paths": {
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"],
+      "@config": ["src/config"],
       "@plugins/*": ["src/plugins/*"],
       "@store/*": ["src/store/*"],
       "@styles/*": ["src/styles/*"],
