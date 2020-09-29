@@ -32,6 +32,7 @@
             v-on="on"
             :active="item.active"
             :disabled="item.disabled"
+            :exact="item.url === '/'"
             :icon="item.icon"
             :subtitle="item.subtitle"
             :title="item.title"
@@ -70,13 +71,11 @@ export default class TheAppDrawer extends Vue {
 
   menuItems = [
     {
-      disabled: false,
       icon: "mdi-view-dashboard",
       title: "Dashboard",
       url: "/",
     },
     {
-      disabled: true,
       icon: "mdi-scale-balance",
       title: "Balancing",
       url: "/balancing",

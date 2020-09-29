@@ -2,7 +2,8 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
 // Views
-import Dashboard from "@views/Dashboard.vue";
+import Balancing from "@views/Balancing";
+import Dashboard from "@views/Dashboard";
 
 Vue.use(VueRouter);
 
@@ -11,6 +12,11 @@ const routes: Array<RouteConfig> = [
     path: "/",
     name: "Dashboard",
     component: Dashboard,
+  },
+  {
+    path: "/balancing",
+    name: "Balancing",
+    component: Balancing,
   },
 ];
 

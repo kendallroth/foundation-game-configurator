@@ -2,11 +2,11 @@
 import { version } from "../package.json";
 
 type ConfigType = {
-  version: string,
+  version: string;
 };
 
 const config: ConfigType = {
   version,
-}
+};
 
 export default config;
