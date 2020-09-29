@@ -1,7 +1,17 @@
 {
-  "name": "foundation-game-configurator",
+  "name": "foundation-configurator",
+  "description": "Simple configurator for Foundation",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "homepage": "https://github.com/kendallroth/foundation-game-configurator",
+  "author": {
+    "email": "kendall@kendallroth.ca",
+    "name": "Kendall Roth",
+    "url": "https://www.kendallroth.ca"
+  },
+  "repository": {
+    "url": "https://github.com/kendallroth/foundation-game-configurator"
+  },
   "scripts": {
     "web:serve": "vue-cli-service serve",
     "web:build": "vue-cli-service build",
