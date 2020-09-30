@@ -102,6 +102,8 @@ export default class TheAppDrawer extends Vue {
 
 .drawer__version {
   padding: 16px;
+  font-size: 0.9rem;
+  font-weight: 300;
   color: white;
   opacity: 0.8;
 }

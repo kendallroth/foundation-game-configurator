@@ -1,5 +1,13 @@
 <template>
-  <v-list-item :disabled="disabled" class="list__item" link :to="to">
+  <v-list-item
+    :disabled="disabled"
+    :exact="exact"
+    :to="to"
+    active-class="list__item--exact"
+    class="list__item"
+    exact-active-class="list__item--exact"
+    link
+  >
     <v-list-item-icon v-if="icon" class="list__item__icon">
       <v-icon>{{ icon }}</v-icon>
     </v-list-item-icon>
@@ -24,6 +32,10 @@ import Component from "vue-class-component";
       type: Boolean,
     },
     disabled: {
+      default: false,
+      type: Boolean,
+    },
+    exact: {
       default: false,
       type: Boolean,
     },
@@ -55,17 +67,23 @@ export default class DrawerLink extends Vue {}
   i {
     font-size: 30px;
   }
+}
 
+.list__item--exact {
   .list__item__indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 5px;
-    content: "";
-    background-color: white;
-    opacity: 0;
-    transition: ease-in-out 0.15s opacity;
+    opacity: 1;
   }
+}
+
+.list__item__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 5px;
+  content: "";
+  background-color: white;
+  opacity: 0;
+  transition: ease-in-out 0.15s opacity;
 }
 </style>
