@@ -1,7 +1,7 @@
 <template>
   <div
     :class="{
-      'action-bar--right': right,
+      'action-bar--right': !left,
       'action-bar--left': left,
     }"
     class="action-bar"
@@ -11,22 +11,13 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  props: {
-    left: {
-      default: false,
-      type: Boolean,
-    },
-    right: {
-      default: true,
-      type: Boolean,
-    },
-  },
-})
-export default class ActionBar extends Vue {}
+@Component
+export default class ActionBar extends Vue {
+  @Prop({ default: false })
+  left!: boolean;
+}
 </script>
 
 <style lang="scss" scoped>

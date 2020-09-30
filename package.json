@@ -28,14 +28,17 @@
   "dependencies": {
     "@kendallroth/vue-simple-forms": "^0.2.2",
     "core-js": "^3.6.5",
+    "reflect-metadata": "^0.1.13",
     "register-service-worker": "^1.7.1",
     "vee-validate": "^3.4.0",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^8.4.2",
+    "vue-fragment": "^1.5.1",
+    "vue-property-decorator": "^8.5.1",
     "vue-router": "^3.2.0",
     "vuetify": "^2.2.11",
-    "vuex": "^3.4.0"
+    "vuex": "^3.4.0",
+    "vuex-module-decorators": "^1.0.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.19",

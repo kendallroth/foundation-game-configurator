@@ -10,43 +10,30 @@
     >
       There are unsaved changes that will be lost if you continue!
     </ConfirmDialog>
-    <div class="text-h4">Balancing</div>
+    <div class="text-h4">Settings</div>
     <ValidationObserver
       v-slot="{ valid: isValid }"
-      ref="balancingFormObserver"
+      ref="settingsFormObserver"
       tag="form"
       @submit.prevent=""
     >
-      <ExpandableSection
-        class="mt-5"
-        subtitle="Modify storage building capacities"
-        title="Storage"
-      >
+      <ExpandableSection class="mt-5" title="Configurator Settings">
         <v-row>
           <v-col>
-            <SelectField
-              v-model="storageForm.fields.warehouseCapacity"
-              :disabled="storageForm.flags.disabled"
-              :items="storageQuantityValues"
-              label="Warehouse Capacity"
-              name="warehouseCapacity"
-              rules="required"
-            />
-          </v-col>
-          <v-col>
-            <SelectField
-              v-model="storageForm.fields.granaryCapacity"
-              :disabled="storageForm.flags.disabled"
-              :items="storageQuantityValues"
-              label="Granary Capacity"
-              name="granaryCapacity"
+            <TextField
+              v-model="settingsForm.fields.modPath"
+              :disabled="settingsForm.flags.disabled"
+              hint="Foundation configurator mod directory"
+              label="Mod Path"
+              name="modPath"
+              persistent-hint
               rules="required"
             />
           </v-col>
           <v-col />
         </v-row>
         <ActionBar class="mt-0" right>
-          <v-btn text>Cancel</v-btn>
+          <v-btn text @click="onCancel">Cancel</v-btn>
           <v-btn :disabled="!isValid" color="primary">Save</v-btn>
         </ActionBar>
       </ExpandableSection>
@@ -66,9 +53,8 @@ import { ValidationObserver } from "vee-validate";
 // Components
 import { ExpandableSection } from "@components/layout";
 
-const storageFormFields = {
-  granaryCapacity: 100,
-  warehouseCapacity: 100,
+const settingsFormFields = {
+  modPath: "",
 };
 
 @Component({
@@ -77,11 +63,16 @@ const storageFormFields = {
     ValidationObserver,
   },
   mixins: [
-    FormCreateMixin("storageForm", storageFormFields),
-    FormLeaveGuardMixin(["storageForm"]),
+    FormCreateMixin("settingsForm", settingsFormFields),
+    FormLeaveGuardMixin(["settingsForm"]),
   ],
 })
-export default class Balancing extends Vue {
-  storageQuantityValues = [50, 100, 200, 400];
+export default class Settings extends Vue {
+  onCancel(): void {
+    // @ts-ignore
+    this.settingsForm.reset();
+    // @ts-ignore
+    this.$refs.settingsFormObserver.reset();
+  }
 }
 </script>

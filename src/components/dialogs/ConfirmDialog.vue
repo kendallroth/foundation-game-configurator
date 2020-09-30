@@ -28,42 +28,26 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  props: {
-    /**
-     * Cancel button text
-     */
-    cancelText: {
-      type: String,
-      default: "No",
-    },
-    /**
-     * Confirm button text
-     */
-    confirmText: {
-      type: String,
-      default: "Yes",
-    },
-    /**
-     * Dialog title
-     */
-    title: {
-      type: String,
-      required: true,
-    },
-    /**
-     * Whether the dialog is shown
-     */
-    value: {
-      type: Boolean,
-      required: true,
-    },
-  },
-})
+@Component
 export default class ConfirmDialog extends Vue {
+  // Cancel button text
+  @Prop({ default: "No " })
+  cancelText!: string;
+
+  // Confirm button text
+  @Prop({ default: "Yes " })
+  confirmText!: string;
+
+  // Dialog title
+  @Prop({ required: true })
+  title!: string;
+
+  // Whether the dialog is shown
+  @Prop({ required: true })
+  value!: boolean;
+
   /**
    * Cancel handler
    */

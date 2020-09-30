@@ -30,16 +30,14 @@
           <DrawerLink
             v-bind="attrs"
             v-on="on"
-            :active="item.active"
             :disabled="item.disabled"
             :exact="item.url === '/'"
             :icon="item.icon"
-            :subtitle="item.subtitle"
             :title="item.title"
             :to="item.url"
           />
         </template>
-        <span>{{ item.text }}</span>
+        <span>{{ item.title }}</span>
       </v-tooltip>
     </v-list>
 
@@ -52,8 +50,7 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Vue } from "vue-property-decorator";
 
 // Components
 import DrawerLink from "./DrawerLink.vue";
@@ -82,6 +79,7 @@ export default class TheAppDrawer extends Vue {
     },
     { disabled: true, icon: "mdi-home", title: "Buildings", url: "/buildings" },
     { disabled: true, icon: "mdi-currency-usd", title: "Trade", url: "/trade" },
+    { icon: "mdi-cog", title: "Settings", url: "/settings" },
   ];
 
   get versionString(): string {

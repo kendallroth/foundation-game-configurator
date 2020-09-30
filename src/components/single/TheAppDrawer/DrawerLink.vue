@@ -22,42 +22,28 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  props: {
-    active: {
-      default: false,
-      type: Boolean,
-    },
-    disabled: {
-      default: false,
-      type: Boolean,
-    },
-    exact: {
-      default: false,
-      type: Boolean,
-    },
-    icon: {
-      default: null,
-      type: String,
-    },
-    subtitle: {
-      default: null,
-      type: String,
-    },
-    title: {
-      required: true,
-      type: String,
-    },
-    to: {
-      required: true,
-      type: String,
-    },
-  },
-})
-export default class DrawerLink extends Vue {}
+@Component
+export default class DrawerLink extends Vue {
+  @Prop({ default: false })
+  disabled!: boolean;
+
+  @Prop({ default: false })
+  exact!: boolean;
+
+  @Prop({ default: null })
+  icon!: string;
+
+  @Prop({ default: null })
+  subtitle!: string;
+
+  @Prop({ required: true })
+  title!: string;
+
+  @Prop({ required: true })
+  to!: string;
+}
 </script>
 
 <style lang="scss" scoped>

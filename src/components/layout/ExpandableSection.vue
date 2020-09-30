@@ -21,22 +21,16 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
-@Component({
-  props: {
-    subtitle: {
-      default: null,
-      type: String,
-    },
-    title: {
-      required: true,
-      type: String,
-    },
-  },
-})
-export default class ExpandableSection extends Vue {}
+@Component
+export default class ExpandableSection extends Vue {
+  @Prop({ default: null })
+  subtitle!: string;
+
+  @Prop({ required: true })
+  title!: string;
+}
 </script>
 
 <style lang="scss" scoped>
@@ -45,11 +39,11 @@ export default class ExpandableSection extends Vue {}
 }
 
 .section__header__subtitle {
+  margin-top: 12px;
   color: grey;
 }
 
 .section__header__title {
-  margin-bottom: 12px;
   font-size: 1.15rem;
   font-weight: 500;
 }

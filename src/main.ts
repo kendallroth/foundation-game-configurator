@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { Plugin as FragmentPlugin } from "vue-fragment";
 
 // Components
 import App from "./App.vue";
@@ -16,6 +17,7 @@ import VeeValidatePlugin from "./plugins/veeValidate";
 Vue.config.productionTip = false;
 
 Vue.use(ComponentsPlugin);
+Vue.use(FragmentPlugin);
 Vue.use(VeeValidatePlugin);
 
 new Vue({
