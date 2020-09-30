@@ -14,7 +14,7 @@
           <slot name="default" />
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn color="primary" small text @click="onCancel">
             {{ cancelText }}
           </v-btn>
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Emit, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class ConfirmDialog extends Vue {
@@ -51,17 +51,19 @@ export default class ConfirmDialog extends Vue {
   /**
    * Cancel handler
    */
+  @Emit("input")
+  @Emit("cancel")
   onCancel() {
-    this.$emit("input", false);
-    this.$emit("cancel");
+    return false;
   }
 
   /**
    * Confirm handler
    */
+  @Emit("input")
+  @Emit("confirm")
   onConfirm() {
-    this.$emit("input", false);
-    this.$emit("confirm");
+    return false;
   }
 }
 </script>

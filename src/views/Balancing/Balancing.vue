@@ -1,15 +1,9 @@
 <template>
   <v-container>
-    <ConfirmDialog
+    <FormLeaveDialog
       v-model="isLeaveFormActive"
-      cancelText="Stay"
-      confirmText="Leave"
-      title="Unsaved Changes"
-      @cancel="formLeaveCallback(false)"
-      @confirm="formLeaveCallback(true)"
-    >
-      There are unsaved changes that will be lost if you continue!
-    </ConfirmDialog>
+      @leave-form="(val) => formLeaveCallback(val)"
+    />
     <div class="text-h4">Balancing</div>
     <ValidationObserver
       v-slot="{ valid: isValid }"
