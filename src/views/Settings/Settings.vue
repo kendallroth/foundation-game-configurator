@@ -17,14 +17,17 @@
             <TextField
               v-model="settingsForm.fields.modPath"
               :disabled="settingsForm.flags.disabled"
+              append-icon="mdi-folder"
               hint="Foundation configurator mod directory"
               label="Mod Path"
               name="modPath"
+              placeholder="/"
               persistent-hint
+              readonly
               rules="required"
+              @click:append="selectModDirectory"
             />
           </v-col>
-          <v-col />
         </v-row>
         <ActionBar class="mt-0" right>
           <v-btn text @click="onCancel">Cancel</v-btn>
@@ -36,12 +39,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { ipcRenderer } from "electron";
 import {
   FormCreateMixin,
   FormLeaveGuardMixin,
   // @ts-ignore
 } from "@kendallroth/vue-simple-forms";
+import { Component, Mixins } from "vue-property-decorator";
 import { ValidationObserver } from "vee-validate";
 
 // Components
@@ -56,17 +60,25 @@ const settingsFormFields = {
     ExpandableSection,
     ValidationObserver,
   },
-  mixins: [
-    FormCreateMixin("settingsForm", settingsFormFields),
-    FormLeaveGuardMixin(["settingsForm"]),
-  ],
 })
-export default class Settings extends Vue {
+export default class Settings extends Mixins(
+  FormCreateMixin("settingsForm", settingsFormFields),
+  FormLeaveGuardMixin(["settingsForm"])
+) {
   onCancel(): void {
     // @ts-ignore
     this.settingsForm.reset();
     // @ts-ignore
     this.$refs.settingsFormObserver.reset();
+  }
+
+  async selectModDirectory(): Promise<void> {
+    const result = await ipcRenderer.invoke("open-folder-dialog");
+    if (!result) return;
+
+    // NOTE: This currently doesn't work ('setValues' does not update 'changed' property!)
+    // @ts-ignore
+    // this.settingsForm.setValues({ modPath: result });
   }
 }
 </script>

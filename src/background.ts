@@ -1,6 +1,6 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, protocol } from "electron";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 const isDevelopment = process.env.NODE_ENV !== "production";
@@ -74,6 +74,22 @@ app.on("ready", async () => {
   }
   createWindow();
 });
+
+ipcMain.handle("open-folder-dialog", async (event) => {
+  const window = BrowserWindow.fromWebContents(event.sender);
+  if (!window) return null;
+
+  const result = await dialog.showOpenDialog(window, {
+    properties: ["openDirectory"]
+  });
+
+  const { filePaths } = result;
+
+  if (!filePaths || !filePaths.length) return null
+
+  // Only a single directory should be selected
+  return filePaths[0];
+})
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {

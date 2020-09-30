@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Mixins } from "vue-property-decorator";
 import {
   FormCreateMixin,
   FormLeaveGuardMixin,
@@ -70,12 +70,11 @@ const storageFormFields = {
     ExpandableSection,
     ValidationObserver,
   },
-  mixins: [
-    FormCreateMixin("storageForm", storageFormFields),
-    FormLeaveGuardMixin(["storageForm"]),
-  ],
 })
-export default class Balancing extends Vue {
+export default class Balancing extends Mixins(
+  FormCreateMixin("storageForm", storageFormFields),
+  FormLeaveGuardMixin(["storageForm"])
+) {
   storageQuantityValues = [50, 100, 200, 400];
 }
 </script>

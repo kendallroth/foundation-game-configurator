@@ -43,6 +43,10 @@ export default {
   },
   props: {
     ...commonProps,
+    appendIcon: {
+      default: null,
+      type: String,
+    },
   },
   data() {
     return {
@@ -51,7 +55,8 @@ export default {
     };
   },
   computed: {
-    appendIcon() {
+    appendIconComputed() {
+      if (this.appendIcon) return this.appendIcon;
       if (!this.hasVisibility) return null;
 
       return this.isVisible ? "mdi-eye" : "mdi-eye-off";
