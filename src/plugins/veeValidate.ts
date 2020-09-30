@@ -1,7 +1,6 @@
 import { extend, setInteractionMode } from "vee-validate";
 import {
   confirmed,
-  email,
   max,
   min,
   numeric,

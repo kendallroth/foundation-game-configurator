@@ -1,1 +1,1 @@
-export { default } from "./TheAppDrawer.vue"
+export { default } from "./TheAppDrawer.vue";

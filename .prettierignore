@@ -1,0 +1,7 @@
+# Ignore artifacts
+build
+dist_electron
+coverage
+
+# Ignore modules
+node_moduels
