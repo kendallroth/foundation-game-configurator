@@ -10,10 +10,10 @@
       ref="textField"
       v-model="innerValue"
       :append-icon="appendIcon"
-      :dense="false"
       :error-messages="errors"
       :type="type"
-      outlined
+      dense
+      filled
       @click:append="onVisibilityClick"
       COMMENT="Bind these last to enable overriding"
       v-bind="$attrs"

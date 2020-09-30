@@ -9,9 +9,9 @@
     <v-select
       ref="selectField"
       v-model="innerValue"
-      :dense="false"
       :error-messages="errors"
       :menu-props="{ offsetY: true }"
+      dense
       filled
       COMMENT2="Bind these last to enable overriding"
       v-bind="$attrs"
