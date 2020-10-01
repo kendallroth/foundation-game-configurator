@@ -63,10 +63,13 @@ app.on("activate", () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", async () => {
+  console.log("should install")
   if (isDevelopment && !process.env.IS_TEST) {
     // Install Vue Devtools
     try {
+      console.log("installing")
       await installExtension(VUEJS_DEVTOOLS);
+      console.log("installed")
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error("Vue Devtools failed to install:", e.toString());
@@ -80,16 +83,16 @@ ipcMain.handle("open-folder-dialog", async (event) => {
   if (!window) return null;
 
   const result = await dialog.showOpenDialog(window, {
-    properties: ["openDirectory"]
+    properties: ["openDirectory"],
   });
 
   const { filePaths } = result;
 
-  if (!filePaths || !filePaths.length) return null
+  if (!filePaths || !filePaths.length) return null;
 
   // Only a single directory should be selected
   return filePaths[0];
-})
+});
 
 // Exit cleanly on request from parent process in development mode.
 if (isDevelopment) {
