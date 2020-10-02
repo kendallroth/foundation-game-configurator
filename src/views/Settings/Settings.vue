@@ -45,7 +45,7 @@
 <script lang="ts">
 import { ipcRenderer } from "electron";
 import { createForm, FormGuardMixin } from "@kendallroth/vue-simple-forms";
-import { FormFields as FormFieldsType } from "@kendallroth/vue-simple-forms/lib/createForm";
+import { FormFields as FormFieldsType } from "@kendallroth/vue-simple-forms/lib/types";
 import { Component, Mixins, Ref } from "vue-property-decorator";
 import { ValidationObserver } from "vee-validate";
 import { getModule } from "vuex-module-decorators";
