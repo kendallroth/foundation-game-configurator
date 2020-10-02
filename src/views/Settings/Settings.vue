@@ -38,6 +38,30 @@
           </v-btn>
         </ActionBar>
       </ExpandableSection>
+      <ExpandableSection class="mt-5" closed title="Reset Data">
+        <ConfirmDialog
+          v-model="isResetAppDialogShown"
+          disabled
+          title="Confirm Reset"
+        >
+          Are you sure you want to reset the app data?
+        </ConfirmDialog>
+        <v-row>
+          <v-col>
+            <div class="">
+              Reset the configurator by clearing the app data.
+            </div>
+            <v-alert class="mt-4" dense outlined type="info">
+              This will not affect saved configuration profiles!
+            </v-alert>
+          </v-col>
+        </v-row>
+        <ActionBar class="mt-0" right>
+          <v-btn color="error" @click="isResetAppDialogShown = true">
+            Reset
+          </v-btn>
+        </ActionBar>
+      </ExpandableSection>
     </ValidationObserver>
   </v-container>
 </template>
@@ -75,6 +99,8 @@ export default class Settings extends Mixins(FormGuardMixin) {
   readonly settingsFormObserver!: InstanceType<typeof ValidationObserver>;
 
   settingsModule = getModule(SettingsModule, this.$store);
+
+  isResetAppDialogShown = false;
 
   settingsForm = createForm(settingsFormFields);
   guardedForms = [this.settingsForm];

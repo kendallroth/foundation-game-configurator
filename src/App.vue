@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
 import "reflect-metadata";
+import { Component, Vue } from "vue-property-decorator";
 
 // Components
 import TheAppBar from "@components/single/TheAppBar.vue";

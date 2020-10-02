@@ -27,6 +27,7 @@ function createWindow() {
       nodeIntegration: (process.env
         .ELECTRON_NODE_INTEGRATION as unknown) as boolean,
     },
+    show: false,
     // @ts-ignore
     icon: path.join(__static, "icon.png"),
   });
@@ -40,6 +41,12 @@ function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+
+  // Only show window once fully loaded
+  // Taken from: https://www.christianengvall.se/electron-white-screen-app-startup/#ready-to-show-event
+  win.once("ready-to-show", () => {
+    if (win) win.show();
+  });
 
   win.on("closed", () => {
     win = null;
