@@ -6,16 +6,17 @@
       border="left"
       icon="mdi-alert"
       type="warning"
+      @click="$router.push('/settings')"
     >
       No mod path has been configured!
       <v-btn text>Configure</v-btn>
     </v-alert>
     <div class="empty-indicator">
       <v-img
+        :maxWidth="$vuetify.breakpoint.sm ? 300 : 500"
         :src="require('@assets/images/undraw_under_construction.svg')"
         class="mb-8"
         maxHeight="300"
-        maxWidth="500"
       />
       <div class="text-h2 text-center">Coming Soon!</div>
     </div>
@@ -28,8 +29,6 @@ import { getModule } from "vuex-module-decorators";
 
 // Utilities
 import { SettingsModule } from "@store/modules";
-
-// const settingsModule = getModule(SettingsModule);
 
 @Component
 export default class Dashboard extends Vue {

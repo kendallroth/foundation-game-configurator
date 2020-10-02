@@ -26,8 +26,16 @@
           </v-col>
         </v-row>
         <ActionBar class="mt-0" right>
-          <v-btn text @click="onCancel">Cancel</v-btn>
-          <v-btn :disabled="!isValid" color="primary">Save</v-btn>
+          <v-btn :disabled="!settingsForm.flags.changed" text @click="onCancel">
+            Cancel
+          </v-btn>
+          <v-btn
+            :disabled="!isValid || !settingsForm.flags.changed"
+            color="primary"
+            @click="onSubmit"
+          >
+            Save
+          </v-btn>
         </ActionBar>
       </ExpandableSection>
     </ValidationObserver>
@@ -37,15 +45,24 @@
 <script lang="ts">
 import { ipcRenderer } from "electron";
 import { createForm, FormGuardMixin } from "@kendallroth/vue-simple-forms";
+import { FormFields as FormFieldsType } from "@kendallroth/vue-simple-forms/lib/createForm";
 import { Component, Mixins, Ref } from "vue-property-decorator";
 import { ValidationObserver } from "vee-validate";
+import { getModule } from "vuex-module-decorators";
 
 // Components
 import { ExpandableSection } from "@components/layout";
 
-const settingsFormFields = {
+// Utilities
+import { SettingsModule } from "@store/modules";
+
+const settingsFormFields: FormFields = {
   modPath: "",
 };
+
+interface FormFields extends FormFieldsType {
+  modPath: string;
+}
 
 @Component({
   components: {
@@ -57,12 +74,29 @@ export default class Settings extends Mixins(FormGuardMixin) {
   @Ref()
   readonly settingsFormObserver!: InstanceType<typeof ValidationObserver>;
 
+  settingsModule = getModule(SettingsModule, this.$store);
+
   settingsForm = createForm(settingsFormFields);
   guardedForms = [this.settingsForm];
+
+  mounted() {
+    const values: FormFields = {
+      modPath: this.settingsModule.modPath || "",
+    };
+    this.settingsForm = createForm(values);
+  }
 
   onCancel(): void {
     this.settingsForm.reset();
     this.settingsFormObserver.reset();
+  }
+
+  onSubmit(): void {
+    const values = this.settingsForm.getValues() as FormFields;
+
+    this.settingsModule.setModPath(values.modPath);
+
+    this.settingsForm.setInitial(values);
   }
 
   async selectModDirectory(): Promise<void> {
