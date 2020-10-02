@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <FormLeaveDialog v-model="isLeaveFormActive" @leave-form="onFormLeave" />
+    <FormLeaveDialog v-model="isFormGuardActive" @leave-form="onFormLeave" />
     <div class="text-h4">Balancing</div>
     <ValidationObserver
       v-slot="{ valid: isValid }"

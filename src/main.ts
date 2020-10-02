@@ -5,7 +5,7 @@ import { Plugin as FragmentPlugin } from "vue-fragment";
 import App from "./App.vue";
 
 // Utilities
-import "@utilities/classComponentHooks"
+import "@utilities/classComponentHooks";
 import "@utilities/registerServiceWorker";
 import router from "./router";
 import store from "./store";
