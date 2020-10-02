@@ -21,6 +21,11 @@ module.exports = {
 
   pluginOptions: {
     electronBuilder: {
+      builderOptions: {
+        appId: "com.kendallroth.foundation-configurator",
+        copyright: "Copyright © 2020 Kendall Roth",
+        productName: "Foundation Configurator",
+      },
       nodeIntegration: true,
     },
   },

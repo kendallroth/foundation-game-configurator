@@ -1,8 +1,10 @@
 "use strict";
 
 import { app, BrowserWindow, dialog, ipcMain, protocol } from "electron";
-import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import path from "path";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -25,6 +27,8 @@ function createWindow() {
       nodeIntegration: (process.env
         .ELECTRON_NODE_INTEGRATION as unknown) as boolean,
     },
+    // @ts-ignore
+    icon: path.join(__static, "icon.png"),
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {

@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app color="transparent" flat height="80">
-    <v-avatar rounded>
+    <v-avatar class="elevation-1" rounded>
       <v-img :src="require('@assets/logo.png')" />
     </v-avatar>
     <v-toolbar-title class="appbar__title">
