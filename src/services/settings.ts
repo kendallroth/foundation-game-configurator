@@ -25,7 +25,7 @@ export default abstract class SettingsService {
    * Set the mod path
    * @param modPath - Mod path
    */
-  static setModPath(modPath: string): void {
+  static setModPath(modPath: string | null): void {
     // TODO: Validate mod path?
 
     storage.set("modPath", modPath);

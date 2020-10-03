@@ -25,13 +25,17 @@
           </v-col>
         </v-row>
         <ActionBar class="mt-0" right>
-          <v-btn :disabled="!settingsForm.flags.changed" text @click="onCancel">
+          <v-btn
+            :disabled="!settingsForm.flags.changed"
+            text
+            @click="settingsCancel"
+          >
             Cancel
           </v-btn>
           <v-btn
             :disabled="!isValid || !settingsForm.flags.changed"
             color="primary"
-            @click="onSubmit"
+            @click="settingsSubmit"
           >
             Save
           </v-btn>
@@ -40,8 +44,8 @@
       <ExpandableSection class="mt-5" closed title="Reset Data">
         <ConfirmDialog
           v-model="isResetAppDialogShown"
-          disabled
           title="Confirm Reset"
+          @confirm="appClear"
         >
           Are you sure you want to reset the app data?
         </ConfirmDialog>
@@ -56,7 +60,12 @@
           </v-col>
         </v-row>
         <ActionBar class="mt-0" right>
-          <v-btn color="error" @click="isResetAppDialogShown = true">
+          <v-btn
+            :disabled="isResettingApp"
+            :loading="isResettingApp"
+            color="error"
+            @click="isResetAppDialogShown = true"
+          >
             Reset
           </v-btn>
         </ActionBar>
@@ -101,6 +110,7 @@ export default class Settings extends Mixins(FormGuardMixin) {
   settingsModule = getModule(SettingsModule, this.$store);
 
   isResetAppDialogShown = false;
+  isResettingApp = false;
 
   settingsForm = createForm(settingsFormFields);
   guardedForms = [this.settingsForm];
@@ -112,12 +122,24 @@ export default class Settings extends Mixins(FormGuardMixin) {
     this.settingsForm = createForm(values);
   }
 
-  onCancel(): void {
+  appClear(): void {
+    this.isResettingApp = true;
+    SettingsService.setModPath(null);
+
+    // DEBUG
+    setTimeout(() => {
+      this.isResettingApp = false;
+
+      this.settingsForm.setInitial({ modPath: null });
+    }, 1000);
+  }
+
+  settingsCancel(): void {
     this.settingsForm.reset();
     this.settingsFormObserver.reset();
   }
 
-  onSubmit(): void {
+  settingsSubmit(): void {
     const values = this.settingsForm.getValues() as SettingsFields;
 
     SettingsService.setModPath(values.modPath);
