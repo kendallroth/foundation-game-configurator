@@ -1,17 +1,15 @@
 <template>
-  <v-container>
+  <PageLayout title="Balancing">
     <FormLeaveDialog v-model="isFormGuardActive" @leave-form="onFormLeave" />
-    <div class="text-h4">Balancing</div>
-    <ValidationObserver
-      v-slot="{ valid: isValid }"
-      ref="storageFormObserver"
-      tag="form"
-      @submit.prevent=""
+    <ExpandableSection
+      subtitle="Modify storage building capacities"
+      title="Storage"
     >
-      <ExpandableSection
-        class="mt-5"
-        subtitle="Modify storage building capacities"
-        title="Storage"
+      <ValidationObserver
+        v-slot="{ valid: isValid }"
+        ref="storageFormObserver"
+        tag="form"
+        @submit.prevent=""
       >
         <v-row>
           <v-col>
@@ -37,12 +35,19 @@
           <v-col />
         </v-row>
         <ActionBar class="mt-0" right>
-          <v-btn text @click="onCancel">Cancel</v-btn>
-          <v-btn :disabled="!isValid" color="primary">Save</v-btn>
+          <v-btn :disabled="!storageForm.flags.changed" text @click="onCancel">
+            Cancel
+          </v-btn>
+          <v-btn
+            :disabled="true || !isValid || !storageForm.flags.changed"
+            color="primary"
+          >
+            Save
+          </v-btn>
         </ActionBar>
-      </ExpandableSection>
-    </ValidationObserver>
-  </v-container>
+      </ValidationObserver>
+    </ExpandableSection>
+  </PageLayout>
 </template>
 
 <script lang="ts">

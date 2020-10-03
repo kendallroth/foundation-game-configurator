@@ -5,6 +5,7 @@
         :maxWidth="$vuetify.breakpoint.sm ? 300 : 500"
         :maxHeight="$vuetify.breakpoint.sm ? 270 : 400"
         :src="require('@assets/images/app_loader.svg')"
+        contain
       />
       <v-progress-linear
         :height="8"
@@ -26,7 +27,7 @@ import { Component, Emit, Vue } from "vue-property-decorator";
 import { SettingsService } from "@services";
 
 @Component
-export default class Dashboard extends Vue {
+export default class TheAppLoader extends Vue {
   /**
    * Application loaded event
    */

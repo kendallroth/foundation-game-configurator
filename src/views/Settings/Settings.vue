@@ -1,14 +1,13 @@
 <template>
-  <v-container>
+  <PageLayout title="Settings">
     <FormLeaveDialog v-model="isFormGuardActive" @leave-form="onFormLeave" />
-    <div class="text-h4">Settings</div>
     <ValidationObserver
       v-slot="{ valid: isValid }"
       ref="settingsFormObserver"
       tag="form"
       @submit.prevent=""
     >
-      <ExpandableSection class="mt-5" title="Configurator Settings">
+      <ExpandableSection title="Configurator Settings">
         <v-row>
           <v-col>
             <TextField
@@ -63,7 +62,7 @@
         </ActionBar>
       </ExpandableSection>
     </ValidationObserver>
-  </v-container>
+  </PageLayout>
 </template>
 
 <script lang="ts">

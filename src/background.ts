@@ -19,7 +19,7 @@ protocol.registerSchemesAsPrivileged([
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800 * 1.5,
+    width: 800 * 1.75,
     height: 600 * 1.5,
     webPreferences: {
       // TODO: Remove when remote module is deprecated/removed

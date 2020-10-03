@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <PageLayout>
     <v-alert
       v-if="!settingsModule.hasModPath"
       class="dashboard__alert"
@@ -16,11 +16,12 @@
         :maxWidth="$vuetify.breakpoint.sm ? 300 : 500"
         :src="require('@assets/images/undraw_under_construction.svg')"
         class="mb-8"
+        contain
         maxHeight="300"
       />
       <div class="text-h2 text-center">Coming Soon!</div>
     </div>
-  </v-container>
+  </PageLayout>
 </template>
 
 <script lang="ts">
