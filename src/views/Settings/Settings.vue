@@ -69,7 +69,7 @@
 <script lang="ts">
 import { ipcRenderer } from "electron";
 import { createForm, FormGuardMixin } from "@kendallroth/vue-simple-forms";
-import { FormFields as FormFieldsType } from "@kendallroth/vue-simple-forms/lib/types";
+import { FormFields } from "@kendallroth/vue-simple-forms/lib/types";
 import { Component, Mixins, Ref } from "vue-property-decorator";
 import { ValidationObserver } from "vee-validate";
 import { getModule } from "vuex-module-decorators";
@@ -78,13 +78,14 @@ import { getModule } from "vuex-module-decorators";
 import { ExpandableSection } from "@components/layout";
 
 // Utilities
+import { SettingsService } from "@services";
 import { SettingsModule } from "@store/modules";
 
-const settingsFormFields: FormFields = {
+const settingsFormFields: SettingsFields = {
   modPath: "",
 };
 
-interface FormFields extends FormFieldsType {
+interface SettingsFields extends FormFields {
   modPath: string;
 }
 
@@ -106,7 +107,7 @@ export default class Settings extends Mixins(FormGuardMixin) {
   guardedForms = [this.settingsForm];
 
   mounted() {
-    const values: FormFields = {
+    const values: SettingsFields = {
       modPath: this.settingsModule.modPath || "",
     };
     this.settingsForm = createForm(values);
@@ -118,9 +119,9 @@ export default class Settings extends Mixins(FormGuardMixin) {
   }
 
   onSubmit(): void {
-    const values = this.settingsForm.getValues() as FormFields;
+    const values = this.settingsForm.getValues() as SettingsFields;
 
-    this.settingsModule.setModPath(values.modPath);
+    SettingsService.setModPath(values.modPath);
 
     this.settingsForm.setInitial(values);
   }

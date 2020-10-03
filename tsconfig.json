@@ -21,7 +21,10 @@
       "@components/*": ["src/components/*"],
       "@config": ["src/config"],
       "@plugins/*": ["src/plugins/*"],
+      "@services": ["src/services"],
+      "@services/*": ["src/services/*"],
       "@store/*": ["src/store/*"],
+      "@storage": ["src/storage"],
       "@styles/*": ["src/styles/*"],
       "@utilities/*": ["src/utilities/*"],
       "@views/*": ["src/views/*"]

@@ -29,6 +29,7 @@
   "dependencies": {
     "@kendallroth/vue-simple-forms": "^0.3.1",
     "core-js": "^3.6.5",
+    "electron-store": "^6.0.0",
     "reflect-metadata": "^0.1.13",
     "register-service-worker": "^1.7.1",
     "vee-validate": "^3.4.0",

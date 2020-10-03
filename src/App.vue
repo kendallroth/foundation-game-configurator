@@ -3,8 +3,13 @@
     <TheAppBar />
 
     <v-main class="app__main">
-      <TheAppDrawer />
-      <div class="app__content">
+      <TheAppDrawer :loading="isLoading" />
+      <TheAppLoader
+        v-if="isLoading"
+        class="app__loading__loader"
+        @loaded="isLoading = false"
+      />
+      <div v-else class="app__content">
         <router-view />
       </div>
     </v-main>
@@ -16,16 +21,18 @@ import "reflect-metadata";
 import { Component, Vue } from "vue-property-decorator";
 
 // Components
-import TheAppBar from "@components/single/TheAppBar.vue";
-import TheAppDrawer from "@components/single/TheAppDrawer";
+import { TheAppBar, TheAppDrawer, TheAppLoader } from "@components/single";
 
 @Component({
   components: {
     TheAppBar,
     TheAppDrawer,
+    TheAppLoader,
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  isLoading = true;
+}
 </script>
 
 <style lang="scss" scoped>

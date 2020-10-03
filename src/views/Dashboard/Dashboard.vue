@@ -33,10 +33,6 @@ import { SettingsModule } from "@store/modules";
 @Component
 export default class Dashboard extends Vue {
   settingsModule = getModule(SettingsModule, this.$store);
-
-  /*get hasModPath(): boolean {
-    return settingsModule.hasModPath;
-  }*/
 }
 </script>
 

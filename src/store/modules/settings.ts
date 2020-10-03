@@ -9,7 +9,7 @@ export default class Settings extends VuexModule {
   }
 
   @Mutation
-  setModPath(path: string): void {
+  setModPath(path: string | null): void {
     this.modPath = path;
   }
 }

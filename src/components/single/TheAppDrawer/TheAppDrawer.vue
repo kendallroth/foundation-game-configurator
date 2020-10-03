@@ -8,7 +8,7 @@
     mini-variant-width="70"
     permanent
   >
-    <v-list class="drawer__list" nav shaped>
+    <v-list v-if="!loading" class="drawer__list" nav shaped>
       <DrawerLink
         disabled
         icon="mdi-account"
@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 // Components
 import DrawerLink from "./DrawerLink.vue";
@@ -64,6 +64,12 @@ import config from "@config";
   },
 })
 export default class TheAppDrawer extends Vue {
+  /**
+   * Whether component is loading
+   */
+  @Prop({ default: false })
+  loading!: boolean;
+
   version: string = config.version;
 
   menuItems = [

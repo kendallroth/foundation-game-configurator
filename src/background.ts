@@ -22,6 +22,8 @@ function createWindow() {
     width: 800 * 1.5,
     height: 600 * 1.5,
     webPreferences: {
+      // TODO: Remove when remote module is deprecated/removed
+      enableRemoteModule: true,
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: (process.env
@@ -43,7 +45,7 @@ function createWindow() {
   }
 
   // Only show window once fully loaded
-  // Taken from: https://www.christianengvall.se/electron-white-screen-app-startup/#ready-to-show-event
+  // Taken from: https://www.electronjs.org/docs/api/browser-window#using-ready-to-show-event
   win.once("ready-to-show", () => {
     if (win) win.show();
   });
