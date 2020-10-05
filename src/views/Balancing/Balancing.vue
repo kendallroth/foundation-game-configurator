@@ -1,6 +1,9 @@
 <template>
   <PageLayout title="Balancing">
     <FormLeaveDialog v-model="isFormGuardActive" @leave-form="onFormLeave" />
+    <v-alert class="" border="left" type="info">
+      Balancing section is not implemented!
+    </v-alert>
     <ExpandableSection
       subtitle="Modify storage building capacities"
       title="Storage"
