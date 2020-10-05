@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels :value="0">
+  <v-expansion-panels :value="closed ? -1 : 0">
     <v-expansion-panel>
       <v-expansion-panel-header class="section__header">
         <template v-slot:default="{}">
@@ -25,9 +25,21 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class ExpandableSection extends Vue {
+  /**
+   * Whether section is closed by default
+   */
+  @Prop({ default: false })
+  closed!: boolean;
+
+  /**
+   * Section subtitle
+   */
   @Prop({ default: null })
   subtitle!: string;
 
+  /**
+   * Section title
+   */
   @Prop({ required: true })
   title!: string;
 }

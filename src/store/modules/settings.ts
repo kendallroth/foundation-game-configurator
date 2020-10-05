@@ -1,7 +1,7 @@
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
 
 @Module({ name: "settings", namespaced: true })
-export default class Settings extends VuexModule {
+export default class SettingsModule extends VuexModule {
   modPath: string | null = null;
 
   get hasModPath(): boolean {
@@ -9,7 +9,7 @@ export default class Settings extends VuexModule {
   }
 
   @Mutation
-  setModPath(path: string): void {
+  setModPath(path: string | null): void {
     this.modPath = path;
   }
 }

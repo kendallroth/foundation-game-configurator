@@ -2,13 +2,14 @@ import { VueConstructor } from "vue/types/vue";
 
 // Components
 import * as FormComponents from "@components/form";
-import { ConfirmDialog } from "@components/dialogs";
-import { ActionBar } from "@components/layout";
+import { ConfirmDialog, FormLeaveDialog } from "@components/dialogs";
+import { ActionBar, PageLayout } from "@components/layout";
 
 const ComponentsPlugin = {
   install: (Vue: VueConstructor) => {
     // Dialogs
     Vue.component(ConfirmDialog.name, ConfirmDialog);
+    Vue.component(FormLeaveDialog.name, FormLeaveDialog);
 
     // Form components
     Object.keys(FormComponents).forEach((key) => {
@@ -19,6 +20,7 @@ const ComponentsPlugin = {
 
     // Layout components
     Vue.component(ActionBar.name, ActionBar);
+    Vue.component(PageLayout.name, PageLayout);
   },
 };
 

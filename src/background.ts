@@ -1,8 +1,10 @@
 "use strict";
 
-import { app, protocol, BrowserWindow } from "electron";
-import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import { app, BrowserWindow, dialog, ipcMain, protocol } from "electron";
 import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
+import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
+import path from "path";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -17,14 +19,19 @@ protocol.registerSchemesAsPrivileged([
 function createWindow() {
   // Create the browser window.
   win = new BrowserWindow({
-    width: 800 * 1.5,
+    width: 800 * 1.75,
     height: 600 * 1.5,
     webPreferences: {
+      // TODO: Remove when remote module is deprecated/removed
+      enableRemoteModule: true,
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: (process.env
         .ELECTRON_NODE_INTEGRATION as unknown) as boolean,
     },
+    show: false,
+    // @ts-ignore
+    icon: path.join(__static, "icon.png"),
   });
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
@@ -36,6 +43,12 @@ function createWindow() {
     // Load the index.html when not in development
     win.loadURL("app://./index.html");
   }
+
+  // Only show window once fully loaded
+  // Taken from: https://www.electronjs.org/docs/api/browser-window#using-ready-to-show-event
+  win.once("ready-to-show", () => {
+    if (win) win.show();
+  });
 
   win.on("closed", () => {
     win = null;
@@ -73,6 +86,22 @@ app.on("ready", async () => {
     }
   }
   createWindow();
+});
+
+ipcMain.handle("open-folder-dialog", async (event) => {
+  const window = BrowserWindow.fromWebContents(event.sender);
+  if (!window) return null;
+
+  const result = await dialog.showOpenDialog(window, {
+    properties: ["openDirectory"],
+  });
+
+  const { filePaths } = result;
+
+  if (!filePaths || !filePaths.length) return null;
+
+  // Only a single directory should be selected
+  return filePaths[0];
 });
 
 // Exit cleanly on request from parent process in development mode.

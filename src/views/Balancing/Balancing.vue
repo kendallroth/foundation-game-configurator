@@ -1,26 +1,18 @@
 <template>
-  <v-container>
-    <ConfirmDialog
-      v-model="isLeaveFormActive"
-      cancelText="Stay"
-      confirmText="Leave"
-      title="Unsaved Changes"
-      @cancel="formLeaveCallback(false)"
-      @confirm="formLeaveCallback(true)"
+  <PageLayout title="Balancing">
+    <FormLeaveDialog v-model="isFormGuardActive" @leave-form="onFormLeave" />
+    <v-alert class="" border="left" type="info">
+      Balancing section is not implemented!
+    </v-alert>
+    <ExpandableSection
+      subtitle="Modify storage building capacities"
+      title="Storage"
     >
-      There are unsaved changes that will be lost if you continue!
-    </ConfirmDialog>
-    <div class="text-h4">Balancing</div>
-    <ValidationObserver
-      v-slot="{ valid: isValid }"
-      ref="balancingFormObserver"
-      tag="form"
-      @submit.prevent=""
-    >
-      <ExpandableSection
-        class="mt-5"
-        subtitle="Modify storage building capacities"
-        title="Storage"
+      <ValidationObserver
+        v-slot="{ valid: isValid }"
+        ref="storageFormObserver"
+        tag="form"
+        @submit.prevent=""
       >
         <v-row>
           <v-col>
@@ -46,21 +38,24 @@
           <v-col />
         </v-row>
         <ActionBar class="mt-0" right>
-          <v-btn text>Cancel</v-btn>
-          <v-btn :disabled="!isValid" color="primary">Save</v-btn>
+          <v-btn :disabled="!storageForm.flags.changed" text @click="onCancel">
+            Cancel
+          </v-btn>
+          <v-btn
+            :disabled="true || !isValid || !storageForm.flags.changed"
+            color="primary"
+          >
+            Save
+          </v-btn>
         </ActionBar>
-      </ExpandableSection>
-    </ValidationObserver>
-  </v-container>
+      </ValidationObserver>
+    </ExpandableSection>
+  </PageLayout>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-import {
-  FormCreateMixin,
-  FormLeaveGuardMixin,
-  // @ts-ignore
-} from "@kendallroth/vue-simple-forms";
+import { createForm, FormGuardMixin } from "@kendallroth/vue-simple-forms";
+import { Component, Mixins, Ref } from "vue-property-decorator";
 import { ValidationObserver } from "vee-validate";
 
 // Components
@@ -76,12 +71,19 @@ const storageFormFields = {
     ExpandableSection,
     ValidationObserver,
   },
-  mixins: [
-    FormCreateMixin("storageForm", storageFormFields),
-    FormLeaveGuardMixin(["storageForm"]),
-  ],
 })
-export default class Balancing extends Vue {
+export default class Balancing extends Mixins(FormGuardMixin) {
+  @Ref()
+  readonly storageFormObserver!: InstanceType<typeof ValidationObserver>;
+
+  storageForm = createForm(storageFormFields);
+  guardedForms = [this.storageForm];
+
   storageQuantityValues = [50, 100, 200, 400];
+
+  onCancel(): void {
+    this.storageForm.reset();
+    this.storageFormObserver.reset();
+  }
 }
 </script>

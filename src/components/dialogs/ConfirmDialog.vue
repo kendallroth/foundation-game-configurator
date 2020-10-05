@@ -14,11 +14,17 @@
           <slot name="default" />
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
+          <v-spacer />
           <v-btn color="primary" small text @click="onCancel">
             {{ cancelText }}
           </v-btn>
-          <v-btn color="error" small text @click="onConfirm">
+          <v-btn
+            :disabled="disabled"
+            color="error"
+            small
+            text
+            @click="onConfirm"
+          >
             {{ confirmText }}
           </v-btn>
         </v-card-actions>
@@ -28,40 +34,56 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Emit, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class ConfirmDialog extends Vue {
-  // Cancel button text
+  /**
+   * Cancel button text
+   */
   @Prop({ default: "No " })
   cancelText!: string;
 
-  // Confirm button text
+  /**
+   * Confirm button text
+   */
   @Prop({ default: "Yes " })
   confirmText!: string;
 
-  // Dialog title
+  /**
+   * Whether the confirmation dialog is disabled
+   */
+  @Prop({ default: false })
+  disabled!: boolean;
+
+  /**
+   * Dialog title
+   */
   @Prop({ required: true })
   title!: string;
 
-  // Whether the dialog is shown
+  /**
+   * Whether the dialog is shown
+   */
   @Prop({ required: true })
   value!: boolean;
 
   /**
    * Cancel handler
    */
+  @Emit("input")
+  @Emit("cancel")
   onCancel() {
-    this.$emit("input", false);
-    this.$emit("cancel");
+    return false;
   }
 
   /**
    * Confirm handler
    */
+  @Emit("input")
+  @Emit("confirm")
   onConfirm() {
-    this.$emit("input", false);
-    this.$emit("confirm");
+    return false;
   }
 }
 </script>
