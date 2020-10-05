@@ -14,6 +14,7 @@ const store = new Store({
   defaults: {
     modPath: "",
   },
+  name: "settings",
 });
 
 export default store;

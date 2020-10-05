@@ -1,7 +1,7 @@
 import { Module, Mutation, VuexModule } from "vuex-module-decorators";
 
 @Module({ name: "settings", namespaced: true })
-export default class Settings extends VuexModule {
+export default class SettingsModule extends VuexModule {
   modPath: string | null = null;
 
   get hasModPath(): boolean {

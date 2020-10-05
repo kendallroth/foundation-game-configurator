@@ -10,6 +10,7 @@ module.exports = {
         "@assets": path.join(src, "./assets"),
         "@components": path.join(src, "./components"),
         "@config": path.join(src, "./config"),
+        "@models": path.join(src, "./types/models"),
         "@plugins": path.join(src, "./plugins"),
         "@services": path.join(src, "./services"),
         "@store": path.join(src, "./store"),

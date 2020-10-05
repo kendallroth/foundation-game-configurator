@@ -20,6 +20,7 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@config": ["src/config"],
+      "@models": ["src/types/models"],
       "@plugins/*": ["src/plugins/*"],
       "@services": ["src/services"],
       "@services/*": ["src/services/*"],
