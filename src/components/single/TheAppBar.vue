@@ -7,11 +7,32 @@
       Foundation Configurator
     </v-toolbar-title>
     <v-spacer />
+    <v-tooltip v-if="!settingsModule.hasModPath" bottom>
+      <template v-slot:activator="{ on, attrs }">
+        <v-icon color="warning" v-bind="attrs" v-on="on">
+          mdi-folder-alert
+        </v-icon>
+      </template>
+      <span>No mod path</span>
+    </v-tooltip>
     <v-btn disabled icon large>
       <v-icon>mdi-account-circle</v-icon>
     </v-btn>
   </v-app-bar>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import { getModule } from "vuex-module-decorators";
+
+// Utilities
+import { SettingsModule } from "@store/modules";
+
+@Component
+export default class TheAppBar extends Vue {
+  settingsModule = getModule(SettingsModule, this.$store);
+}
+</script>
 
 <style lang="scss" scoped>
 .appbar__title {

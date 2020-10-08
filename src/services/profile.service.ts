@@ -13,7 +13,7 @@ import { ProfileModule } from "@store/modules";
 import Background from "@utilities/background";
 
 // Data
-import defaultProfileJson from "../data/default.json";
+import defaultProfileJson from "@data/profiles/default.json";
 
 const defaultProfileFile = "default.json";
 
