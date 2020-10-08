@@ -14,6 +14,7 @@
           <router-view />
         </transition>
       </div>
+      <TheAppSnackbar />
     </v-main>
   </v-app>
 </template>
@@ -23,13 +24,19 @@ import "reflect-metadata";
 import { Component, Vue } from "vue-property-decorator";
 
 // Components
-import { TheAppBar, TheAppDrawer, TheAppLoader } from "@components/single";
+import {
+  TheAppBar,
+  TheAppDrawer,
+  TheAppLoader,
+  TheAppSnackbar,
+} from "@components/single";
 
 @Component({
   components: {
     TheAppBar,
     TheAppDrawer,
     TheAppLoader,
+    TheAppSnackbar,
   },
 })
 export default class App extends Vue {

@@ -11,7 +11,7 @@
         {{ title }}
       </div>
       <div class="title-bar__actions">
-        <BackButton v-if="back" :class="{ 'mr-4': $slots.actions }" />
+        <BackButton v-if="back" :class="{ 'mr-4': $slots.actions }" rounded />
         <slot name="actions" />
       </div>
     </div>

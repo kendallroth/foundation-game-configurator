@@ -14,13 +14,21 @@
       </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action class="profile__actions">
-      <v-btn v-if="!profile.current" icon>
+      <v-btn
+        v-if="!profile.current"
+        icon
+        @click="$notifyWarning('Not implemented yet')"
+      >
         <v-icon color="primary">mdi-star</v-icon>
       </v-btn>
       <v-btn :disabled="profile.current" :to="`/profiles/${profile.code}`" icon>
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
-      <v-btn :disabled="profile.current" icon>
+      <v-btn
+        :disabled="profile.current"
+        icon
+        @click="$notifyWarning('Not implemented yet')"
+      >
         <v-icon color="red">mdi-delete</v-icon>
       </v-btn>
     </v-list-item-action>
