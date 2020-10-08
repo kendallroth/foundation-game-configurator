@@ -10,7 +10,6 @@
   >
     <v-list v-if="!loading" class="drawer__list" nav shaped>
       <DrawerLink
-        disabled
         icon="mdi-account"
         subtitle="Default"
         title="Profiles"
@@ -98,6 +97,8 @@ export default class TheAppDrawer extends Vue {
 .drawer {
   flex-shrink: 0;
   border-top-right-radius: 24px;
+  // Place drawer above transitioning content
+  z-index: 2;
 }
 
 .drawer__list {

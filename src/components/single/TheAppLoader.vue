@@ -24,7 +24,7 @@
 import { Component, Emit, Vue } from "vue-property-decorator";
 
 // Utilities
-import { SettingsService } from "@services";
+import { ProfileService, SettingsService } from "@services";
 
 @Component
 export default class TheAppLoader extends Vue {
@@ -32,17 +32,29 @@ export default class TheAppLoader extends Vue {
    * Application loaded event
    */
   @Emit("loaded")
-  onLoaded() {
+  onLoaded(): true {
     return true;
   }
 
   mounted() {
+    this.loadAppData();
+  }
+
+  /**
+   * Load the initial app data
+   */
+  async loadAppData() {
+    await ProfileService.loadProfiles();
+
+    // Load current profile (updating cache)
+    ProfileService.getCurrentProfile(true);
+
     SettingsService.loadModPath();
 
-    // DEBUG
+    // DEBUG: Create a smoother system for showing loader for minimum time
     setTimeout(() => {
       this.onLoaded();
-    }, 1500);
+    }, 500);
   }
 }
 </script>

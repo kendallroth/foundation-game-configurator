@@ -12,6 +12,14 @@ export default abstract class SettingsService {
   static settingsModule = getModule(SettingsModule, store);
 
   /**
+   * Clear/reset the mod path
+   */
+  static clearModPath(): void {
+    storage.set("modPath", null);
+    this.settingsModule.setModPath(null);
+  }
+
+  /**
    * Load the mod path
    * @return Mod path
    */
@@ -25,7 +33,7 @@ export default abstract class SettingsService {
    * Set the mod path
    * @param modPath - Mod path
    */
-  static setModPath(modPath: string | null): void {
+  static setModPath(modPath: string): void {
     // TODO: Validate mod path?
 
     storage.set("modPath", modPath);

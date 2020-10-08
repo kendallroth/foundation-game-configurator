@@ -10,7 +10,9 @@
         @loaded="isLoading = false"
       />
       <div v-else class="app__content">
-        <router-view />
+        <transition name="slide" mode="out-in">
+          <router-view />
+        </transition>
       </div>
     </v-main>
   </v-app>
@@ -47,5 +49,17 @@ export default class App extends Vue {
 .app__main > div {
   display: flex;
   flex-direction: row;
+}
+
+// Route transition animations
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+.slide-enter,
+.slide-leave-to {
+  opacity: 0;
+  transform: translateX(-5%);
+  // transform: translateY(10%);
 }
 </style>

@@ -4,6 +4,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 // Views
 import Balancing from "@views/Balancing";
 import Dashboard from "@views/Dashboard";
+import Profiles from "@views/Profiles";
 import Settings from "@views/Settings";
 
 Vue.use(VueRouter);
@@ -18,6 +19,11 @@ const routes: Array<RouteConfig> = [
     path: "/balancing",
     name: "Balancing",
     component: Balancing,
+  },
+  {
+    path: "/profiles",
+    name: "Profiles",
+    component: Profiles,
   },
   {
     path: "/settings",

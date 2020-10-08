@@ -5,7 +5,21 @@ import installExtension, { VUEJS_DEVTOOLS } from "electron-devtools-installer";
 import { createProtocol } from "vue-cli-plugin-electron-builder/lib";
 import path from "path";
 
+// Types
+import { AppPath } from "@typings";
+
 const isDevelopment = process.env.NODE_ENV !== "production";
+
+// TODO: Must fix this at some point before upgrading to Electron 11!
+//       There is a bug causing issues with using native Node modules (ie. "fs")
+//         in renderer processes, meaning it is necessary to either only use sync
+//         "fs" methods OR perform all "fs" operations in main thread and communicate.
+//       This should likely be updated to perform these operations in the main thread (security)
+//         and abstract away behind an API of some sort (ie. Background utils, etc)
+//       Issue: https://github.com/electron/electron/issues/22119
+// TODO: Fix related issue where a reload is required before "fs" works properly!
+//       Issue: https://github.com/electron/electron/issues/19554
+app.allowRendererProcessReuse = false;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -88,6 +102,7 @@ app.on("ready", async () => {
   createWindow();
 });
 
+// Open a directory picker
 ipcMain.handle("open-folder-dialog", async (event) => {
   const window = BrowserWindow.fromWebContents(event.sender);
   if (!window) return null;
@@ -102,6 +117,11 @@ ipcMain.handle("open-folder-dialog", async (event) => {
 
   // Only a single directory should be selected
   return filePaths[0];
+});
+
+// Get the app data file path
+ipcMain.handle("get-file-path", (e, pathType: AppPath = "userData"): string => {
+  return app.getPath(pathType);
 });
 
 // Exit cleanly on request from parent process in development mode.

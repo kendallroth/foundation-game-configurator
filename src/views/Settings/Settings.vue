@@ -75,7 +75,6 @@
 </template>
 
 <script lang="ts">
-import { ipcRenderer } from "electron";
 import { createForm, FormGuardMixin } from "@kendallroth/vue-simple-forms";
 import { FormFields } from "@kendallroth/vue-simple-forms/lib/types";
 import { Component, Mixins, Ref } from "vue-property-decorator";
@@ -88,6 +87,7 @@ import { ExpandableSection } from "@components/layout";
 // Utilities
 import { SettingsService } from "@services";
 import { SettingsModule } from "@store/modules";
+import Background from "@utilities/background";
 
 const settingsFormFields: SettingsFields = {
   modPath: "",
@@ -124,7 +124,7 @@ export default class Settings extends Mixins(FormGuardMixin) {
 
   appClear(): void {
     this.isResettingApp = true;
-    SettingsService.setModPath(null);
+    SettingsService.clearModPath();
 
     // DEBUG
     setTimeout(() => {
@@ -148,7 +148,7 @@ export default class Settings extends Mixins(FormGuardMixin) {
   }
 
   async selectModDirectory(): Promise<void> {
-    const result = await ipcRenderer.invoke("open-folder-dialog");
+    const result = await Background.openFolderDialog();
     if (!result) return;
 
     this.settingsForm.setValues({ modPath: result });

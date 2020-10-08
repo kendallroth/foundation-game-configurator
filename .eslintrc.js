@@ -17,6 +17,7 @@ module.exports = {
     "no-console": "warn",
     "no-debugger": "warn",
     "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/no-inferrable-types": ["warn", { ignoreParameters: true }]
   },
   overrides: [
     {

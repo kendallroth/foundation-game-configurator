@@ -9,6 +9,7 @@ module.exports = {
       alias: {
         "@assets": path.join(src, "./assets"),
         "@components": path.join(src, "./components"),
+        "@data": path.join(src, "./data"),
         "@config": path.join(src, "./config"),
         "@models": path.join(src, "./types/models"),
         "@plugins": path.join(src, "./plugins"),
@@ -16,6 +17,7 @@ module.exports = {
         "@store": path.join(src, "./store"),
         "@styles": path.join(src, "./styles"),
         "@storage": path.join(src, "./storage"),
+        "@typings": path.join(src, "./types"),
         "@utilities": path.join(src, "./utilities"),
         "@views": path.join(src, "./views"),
       },

@@ -3,7 +3,7 @@ import { VueConstructor } from "vue/types/vue";
 // Components
 import * as FormComponents from "@components/form";
 import { ConfirmDialog, FormLeaveDialog } from "@components/dialogs";
-import { ActionBar, PageLayout } from "@components/layout";
+import { ActionBar, PageLayout, TitleBar } from "@components/layout";
 
 const ComponentsPlugin = {
   install: (Vue: VueConstructor) => {
@@ -21,6 +21,7 @@ const ComponentsPlugin = {
     // Layout components
     Vue.component(ActionBar.name, ActionBar);
     Vue.component(PageLayout.name, PageLayout);
+    Vue.component(TitleBar.name, TitleBar);
   },
 };
 

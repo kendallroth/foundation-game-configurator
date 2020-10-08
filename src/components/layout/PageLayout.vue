@@ -1,8 +1,6 @@
 <template>
   <v-container class="layout__container">
-    <div v-if="title" :class="[titleClass]" class="text-h4 mb-4">
-      {{ title }}
-    </div>
+    <TitleBar v-if="title" :title="title" :titleClass="titleClass" />
     <slot />
   </v-container>
 </template>
