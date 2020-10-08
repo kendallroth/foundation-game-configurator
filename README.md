@@ -2,7 +2,13 @@
 
 > Making configuring Foundation a breeze!
 
+<div align="center">
+  <img width="480" height="270" src="./assets/screenshots/2020_10_08_dashboard.png" />
+</div>
+
 ## Description
+
+Simple configurator tool for [Foundation](https://www.polymorph.games/) inspired by [Fiery Essentials](https://foundation.mod.io/fiery-essential) _and_ developed to help me learn Electron and TypeScript.
 
 ## Feature List
 
