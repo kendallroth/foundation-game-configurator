@@ -25,6 +25,13 @@
   - [ ] Large list of villager names (_plus custom?_)
   - [ ] Disable welcome quests
 
+## Attributions
+
+This project is only possible through the help and support of some amazing people!
+
+- [firesofhades](https://mod.io/members/firesofhades)
+  - `fireofhades` provided some invaluable support to get me up and running, and graciously allowed me to study their [Fiery Essentials](https://foundation.mod.io/fiery-essential) configurator...their insightful comments saved me a lot of time and tears!
+
 ## Contributing
 
 Contributions are definitely welcome, as this is my first experience in modding (or Electron...)! I'll be working on a `CONTRIBUTING` guideline at some point...
