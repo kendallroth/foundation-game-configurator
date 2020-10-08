@@ -39,7 +39,7 @@ import { ProfileModule } from "@store/modules";
     ProfileItem,
   },
 })
-export default class Profiles extends Vue {
+export default class ProfilesView extends Vue {
   profileModule = getModule(ProfileModule, this.$store);
 
   // NOTE: Default profile is manually rendered (to always be at top!)

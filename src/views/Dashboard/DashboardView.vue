@@ -32,7 +32,7 @@ import { getModule } from "vuex-module-decorators";
 import { SettingsModule } from "@store/modules";
 
 @Component
-export default class Dashboard extends Vue {
+export default class DashboardView extends Vue {
   settingsModule = getModule(SettingsModule, this.$store);
 }
 </script>

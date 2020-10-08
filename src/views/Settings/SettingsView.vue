@@ -103,7 +103,7 @@ interface SettingsFields extends FormFields {
     ValidationObserver,
   },
 })
-export default class Settings extends Mixins(FormGuardMixin) {
+export default class SettingsView extends Mixins(FormGuardMixin) {
   @Ref()
   readonly settingsFormObserver!: InstanceType<typeof ValidationObserver>;
 

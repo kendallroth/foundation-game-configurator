@@ -1,1 +1,1 @@
-export { default } from "./Profiles.vue";
+export { default } from "./ProfilesView.vue";

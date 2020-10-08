@@ -72,7 +72,7 @@ const storageFormFields = {
     ValidationObserver,
   },
 })
-export default class Balancing extends Mixins(FormGuardMixin) {
+export default class BalancingView extends Mixins(FormGuardMixin) {
   @Ref()
   readonly storageFormObserver!: InstanceType<typeof ValidationObserver>;
 
