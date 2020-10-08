@@ -1,1 +1,1 @@
-export { default } from "./BalancingView.vue";
+export { default as BalancingView } from "./BalancingView.vue";

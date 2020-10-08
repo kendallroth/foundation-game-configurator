@@ -18,6 +18,7 @@
       COMMENT="Bind these last to enable overriding"
       v-bind="$attrs"
       v-on="$listeners"
+      @click:clear="onClearField"
     />
   </ValidationProvider>
 </template>
@@ -87,6 +88,15 @@ export default {
      */
     focus() {
       return this.$refs.textField.$refs.input.focus();
+    },
+    /**
+     * Clear the field
+     */
+    onClearField() {
+      // NOTE: Must wait until next tick as Vuetify overwrites with null otherwise...
+      setTimeout(() => {
+        this.innerValue = "";
+      }, 0);
     },
     /**
      * Toggle the field visibility

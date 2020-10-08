@@ -2,7 +2,7 @@
   <PageLayout>
     <TitleBar title="Profiles">
       <template v-slot:actions>
-        <v-btn color="primary" disabled rounded>
+        <v-btn color="primary" rounded to="/profiles/new">
           <v-icon left>mdi-plus</v-icon>Add
         </v-btn>
       </template>

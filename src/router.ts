@@ -2,33 +2,46 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 
 // Views
-import Balancing from "@views/Balancing";
-import Dashboard from "@views/Dashboard";
-import Profiles from "@views/Profiles";
-import Settings from "@views/Settings";
+import { BalancingView } from "@views/Balancing";
+import { DashboardView } from "@views/Dashboard";
+import { ProfileFormView, ProfilesView } from "@views/Profiles";
+import { SettingsView } from "@views/Settings";
 
 Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
     path: "/",
-    name: "Dashboard",
-    component: Dashboard,
+    name: "dashboard",
+    component: DashboardView,
   },
   {
     path: "/balancing",
-    name: "Balancing",
-    component: Balancing,
+    name: "balancing",
+    component: BalancingView,
   },
   {
     path: "/profiles",
-    name: "Profiles",
-    component: Profiles,
+    name: "profiles",
+    component: ProfilesView,
+  },
+  {
+    path: "/profiles/new",
+    name: "profileAdd",
+    component: ProfileFormView,
+    props: {
+      adding: true,
+    },
+  },
+  {
+    path: "/profiles/:code",
+    name: "profileDetails",
+    component: ProfileFormView,
   },
   {
     path: "/settings",
-    name: "Settings",
-    component: Settings,
+    name: "settings",
+    component: SettingsView,
   },
 ];
 

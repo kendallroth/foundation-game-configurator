@@ -1,1 +1,1 @@
-export { default } from "./DashboardView.vue";
+export { default as DashboardView } from "./DashboardView.vue";

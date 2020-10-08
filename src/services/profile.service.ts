@@ -59,9 +59,6 @@ export default abstract class ProfileService {
   private static async readProfiles(profilePath: string): Promise<Profile[]> {
     const fileNames = await fs.readdir(profilePath);
 
-    // eslint-disable-next-line no-console
-    console.log(`Found ${fileNames.length} profiles`, fileNames);
-
     const profiles: Profile[] = [];
     for (const name of fileNames) {
       let json;

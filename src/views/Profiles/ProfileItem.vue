@@ -17,7 +17,7 @@
       <v-btn v-if="!profile.current" icon>
         <v-icon color="primary">mdi-star</v-icon>
       </v-btn>
-      <v-btn :disabled="profile.current" icon>
+      <v-btn :disabled="profile.current" :to="`/profiles/${profile.code}`" icon>
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn :disabled="profile.current" icon>
