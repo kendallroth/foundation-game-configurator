@@ -1,6 +1,11 @@
 <template>
   <v-container class="layout__container">
-    <TitleBar v-if="title" :title="title" :titleClass="titleClass" />
+    <TitleBar
+      v-if="title"
+      :back="back"
+      :title="title"
+      :titleClass="titleClass"
+    />
     <slot />
   </v-container>
 </template>
@@ -10,6 +15,9 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class PageLayout extends Vue {
+  @Prop({ default: false })
+  back!: boolean;
+
   @Prop({ default: null })
   title!: string;
 

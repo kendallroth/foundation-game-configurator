@@ -1,5 +1,5 @@
 <template>
-  <PageLayout :title="adding ? 'Add Profile' : 'Edit Profile'">
+  <PageLayout back :title="adding ? 'Add Profile' : 'Edit Profile'">
     <FormLeaveDialog v-model="isFormGuardActive" @leave-form="onFormLeave" />
     <v-card class="profile-details">
       <ValidationObserver
@@ -41,6 +41,7 @@
             />
           </v-col>
         </v-row>
+
         <ActionBar class="mt-0" right>
           <v-btn :disabled="!profileForm.flags.changed" text @click="onCancel">
             Cancel

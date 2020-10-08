@@ -11,6 +11,7 @@
         {{ title }}
       </div>
       <div class="title-bar__actions">
+        <BackButton v-if="back" :class="{ 'mr-4': $slots.actions }" />
         <slot name="actions" />
       </div>
     </div>
@@ -25,6 +26,12 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class TitleBar extends Vue {
+  /**
+   * Whether backwards navigation is enabled
+   */
+  @Prop({ default: false })
+  back!: boolean;
+
   @Prop({ default: null })
   subtitle!: string;
 
