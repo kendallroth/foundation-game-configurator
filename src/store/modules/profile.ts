@@ -29,6 +29,10 @@ export default class ProfileModule extends VuexModule {
     }, {});
   }
 
+  get profileName(): string {
+    return this.currentProfile ? this.currentProfile.name : "N/A";
+  }
+
   @Mutation
   setProfiles(profiles: Profile[]) {
     this.profileList = profiles;

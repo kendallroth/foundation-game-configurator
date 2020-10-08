@@ -9,9 +9,13 @@
     </TitleBar>
     <v-card class="profiles">
       <ProfileItem :profile="profileModule.defaultProfile" />
+      <v-divider class="mt-4" />
       <v-subheader>Custom Profiles</v-subheader>
-      <fragment v-for="profile in customProfiles" :key="profile.code">
-        <v-divider />
+      <fragment
+        v-for="(profile, key, idx) in customProfiles"
+        :key="profile.code"
+      >
+        <v-divider v-if="idx > 0" />
         <ProfileItem :profile="profile" />
       </fragment>
       <div v-if="!Object.keys(customProfiles).length" class="text-body-1 px-4">

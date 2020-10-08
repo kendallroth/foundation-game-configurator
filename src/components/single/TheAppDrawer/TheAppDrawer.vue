@@ -10,8 +10,8 @@
   >
     <v-list v-if="!loading" class="drawer__list" nav shaped>
       <DrawerLink
+        :subtitle="profileModule.profileName"
         icon="mdi-account"
-        subtitle="Default"
         title="Profiles"
         to="/profiles"
       />
@@ -50,12 +50,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { getModule } from "vuex-module-decorators";
 
 // Components
 import DrawerLink from "./DrawerLink.vue";
 
 // Utilities
 import config from "@config";
+import { ProfileModule } from "@store/modules";
 
 @Component({
   components: {
@@ -86,6 +88,8 @@ export default class TheAppDrawer extends Vue {
     { disabled: true, icon: "mdi-currency-usd", title: "Trade", url: "/trade" },
     { icon: "mdi-cog", title: "Settings", url: "/settings" },
   ];
+
+  profileModule = getModule(ProfileModule, this.$store);
 
   get versionString(): string {
     return `v${this.version}`;

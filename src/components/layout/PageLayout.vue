@@ -20,6 +20,6 @@ export default class PageLayout extends Vue {
 
 <style lang="scss" scoped>
 .layout__container {
-  padding: 0 24px 12px;
+  padding: 12px 24px 24px;
 }
 </style>
