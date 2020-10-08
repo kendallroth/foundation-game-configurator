@@ -1,5 +1,5 @@
 <template>
-  <v-list-item active-class="highlighted">
+  <v-list-item :class="{ 'blue lighten-5': profile.current }" class="profile">
     <v-list-item-content>
       <v-list-item-title class="profile__title">
         <span :class="{ 'profile__title--current': profile.current }">
@@ -41,6 +41,10 @@ export default class ProfileItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.profile {
+  border-radius: 0 !important; // Vuetify card item override
+}
+
 .profile__actions {
   display: flex;
   flex-direction: row;
