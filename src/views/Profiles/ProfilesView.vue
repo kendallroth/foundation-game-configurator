@@ -95,7 +95,7 @@ export default class ProfilesView extends Vue {
     this.profileToSetCurrent = profile;
   }
 
-  profileDelete(profile: Profile) {
+  profileDelete() {
     if (!this.profileToDelete) return;
     // TODO
     this.$notifyWarning("Not implemented yet");

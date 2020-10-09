@@ -22,44 +22,28 @@
 
 <script>
 import { ValidationProvider } from "vee-validate";
+import { Component } from "vue-property-decorator";
 
 // Utilities
-import {
-  commonData,
-  commonLifecycle,
-  commonProps,
-  commonWatch,
-} from "./common";
+import CommonField from "./common";
 
 /**
  * Vuetify wrapper (with validation)
  */
-export default {
-  name: "SelectField",
+
+@Component({
   components: {
     ValidationProvider,
   },
-  props: {
-    ...commonProps,
-  },
-  data() {
-    return {
-      ...commonData,
-    };
-  },
-  watch: {
-    ...commonWatch,
-  },
-  created() {
-    commonLifecycle.created(this);
-  },
-  methods: {
-    /**
-     * Focus on the field
-     */
-    focus() {
-      return this.$refs.selectField.$refs.input.focus();
-    },
-  },
-};
+})
+class SelectField extends CommonField {
+  /**
+   * Focus on the field
+   */
+  focus() {
+    return this.$refs.selectField.$refs.input.focus();
+  }
+}
+
+export default SelectField;
 </script>

@@ -27,7 +27,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "@kendallroth/vue-simple-forms": "^0.3.1",
+    "@kendallroth/vue-simple-forms": "^0.3.2",
     "core-js": "^3.6.5",
     "electron-store": "^6.0.0",
     "reflect-metadata": "^0.1.13",

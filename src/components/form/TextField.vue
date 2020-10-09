@@ -9,7 +9,7 @@
     <v-text-field
       ref="textField"
       v-model="innerValue"
-      :append-icon="appendIcon"
+      :append-icon="appendIconComputed"
       :error-messages="errors"
       :type="type"
       dense
@@ -25,87 +25,73 @@
 
 <script>
 import { ValidationProvider } from "vee-validate";
+import { Component } from "vue-property-decorator";
 
 // Utilities
-import {
-  commonData,
-  commonLifecycle,
-  commonProps,
-  commonWatch,
-} from "./common";
+import CommonField from "./common";
 
 /**
  * Vuetify wrapper (with validation)
  */
-export default {
-  name: "TextField",
+@Component({
   components: {
     ValidationProvider,
   },
-  props: {
-    ...commonProps,
-    appendIcon: {
-      default: null,
-      type: String,
-    },
-  },
-  data() {
-    return {
-      ...commonData,
-      isVisible: true,
-    };
-  },
-  computed: {
-    appendIconComputed() {
-      if (this.appendIcon) return this.appendIcon;
-      if (!this.hasVisibility) return null;
+})
+class TextField extends CommonField {
+  get appendIconComputed() {
+    if (this.$attrs.appendIcon) return this.$attrs.appendIcon;
+    if (!this.hasVisibility) return null;
 
-      return this.isVisible ? "mdi-eye" : "mdi-eye-off";
-    },
-    // Only password-type fields can have a visibility toggle
-    hasVisibility() {
-      return this.$attrs.type === "password";
-    },
-    type() {
-      if (!this.hasVisibility) return this.$attrs.type;
+    return this.isVisible ? "mdi-eye" : "mdi-eye-off";
+  }
 
-      return this.isVisible ? "text" : "password";
-    },
-  },
-  watch: {
-    ...commonWatch,
-  },
+  // Only password-type fields can have a visibility toggle
+  get hasVisibility() {
+    return this.$attrs.type === "password";
+  }
+
+  get type() {
+    if (!this.hasVisibility) return this.$attrs.type;
+
+    return this.isVisible ? "text" : "password";
+  }
+
+  // Whether password is visible
+  isVisible = true;
+
   created() {
-    commonLifecycle.created(this);
-
     if (this.hasVisibility) {
       this.isVisible = false;
     }
-  },
-  methods: {
-    /**
-     * Focus on the field
-     */
-    focus() {
-      return this.$refs.textField.$refs.input.focus();
-    },
-    /**
-     * Clear the field
-     */
-    onClearField() {
-      // NOTE: Must wait until next tick as Vuetify overwrites with null otherwise...
-      setTimeout(() => {
-        this.innerValue = "";
-      }, 0);
-    },
-    /**
-     * Toggle the field visibility
-     */
-    onVisibilityClick() {
-      if (!this.hasVisibility) return;
+  }
 
-      this.isVisible = !this.isVisible;
-    },
-  },
-};
+  /**
+   * Focus on the field
+   */
+  focus() {
+    return this.$refs.textField.$refs.input.focus();
+  }
+
+  /**
+   * Clear the field
+   */
+  onClearField() {
+    // NOTE: Must wait until next tick as Vuetify overwrites with null otherwise...
+    setTimeout(() => {
+      this.innerValue = "";
+    }, 0);
+  }
+
+  /**
+   * Toggle the field visibility
+   */
+  onVisibilityClick() {
+    if (!this.hasVisibility) return;
+
+    this.isVisible = !this.isVisible;
+  }
+}
+
+export default TextField;
 </script>

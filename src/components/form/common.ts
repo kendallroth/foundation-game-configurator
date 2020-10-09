@@ -2,65 +2,58 @@
  * Common VeeValidate Vuetify override items
  */
 
-const commonData = {
-  innerValue: "",
-};
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
-const commonLifecycle = {
-  created(that: any) {
-    if (!that) {
-      // eslint-disable-next-line no-console
-      console.error("commonLifecycle.created called with no 'this' context!");
-    }
-
-    if (that.value) {
-      that.innerValue = that.value;
-    }
-  },
-};
-
-const commonProps = {
+@Component
+class CommonField extends Vue {
   /**
    * Validation rules
    */
-  rules: {
-    type: [Object, String],
-    default: "",
-  },
+  @Prop({ default: "" })
+  rules!: object | string;
+
   /**
    * Value (must be included in props)
    */
-  value: {
-    type: null,
-  },
+  @Prop({ required: true })
+  value!: string | number | boolean;
+
   /**
    * Validation ID (defaults to "name" attribute)
-   *   Use if textfield name is not proper
+   *   Use if component name is not proper
    */
-  vid: {
-    type: String,
-    default: null,
-  },
+  @Prop({ default: null })
+  vid!: string | null;
+
   /**
    * Validation message field name (defaults to "label" attribute)
-   *   Use if textfield label is not proper
+   *   Use if component label is not proper
    */
-  vname: {
-    type: String,
-    default: null,
-  },
-};
+  @Prop({ default: null })
+  vname!: string | null;
 
-const commonWatch = {
+  // Inner value is used for v-model
+  innerValue: any = "";
+
   // Handles internal model changes
-  innerValue(newVal: any) {
-    // @ts-ignore
+  @Watch("innerValue")
+  onInnerValueChanged(newVal: any) {
     this.$emit("input", newVal);
-  },
-  // Handles external model changes
-  value(newVal: any) {
-    this.innerValue = newVal;
-  },
-};
+  }
 
-export { commonData, commonLifecycle, commonProps, commonWatch };
+  // Handles external model changes
+  @Watch("value")
+  onValueChanged(newVal: any) {
+    this.innerValue = newVal;
+  }
+
+  created() {
+    if (this.value) {
+      this.innerValue = this.value;
+    }
+  }
+}
+
+export default CommonField;
+
+/* eslint @typescript-eslint/no-explicit-any: off */
