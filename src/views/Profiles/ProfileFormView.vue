@@ -42,16 +42,29 @@
           </v-col>
         </v-row>
 
-        <ActionBar class="mt-0" right>
-          <v-btn :disabled="!profileForm.flags.changed" text @click="onCancel">
-            Cancel
-          </v-btn>
-          <v-btn
-            :disabled="true || !isValid || !profileForm.flags.changed"
-            color="primary"
-          >
-            {{ adding ? "Add" : "Save" }}
-          </v-btn>
+        <ActionBar class="mt-0">
+          <template v-slot:left>
+            <SwitchField
+              v-model="profileForm.fields.current"
+              label="Set as current profile"
+              name="current"
+            />
+          </template>
+          <template v-slot:right>
+            <v-btn
+              :disabled="!profileForm.flags.changed"
+              text
+              @click="onCancel"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              :disabled="true || !isValid || !profileForm.flags.changed"
+              color="primary"
+            >
+              {{ adding ? "Add" : "Save" }}
+            </v-btn>
+          </template>
         </ActionBar>
       </ValidationObserver>
     </v-card>
@@ -72,6 +85,7 @@ import { ProfileModule } from "@store/modules";
 
 const profileFormFields = {
   code: "",
+  current: true,
   description: "",
   name: "",
 };
@@ -112,6 +126,7 @@ export default class ProfileFormView extends Mixins(FormGuardMixin) {
 
     this.profileForm.setInitial({
       code: profile.code || "",
+      current: true,
       description: profile.description || "",
       name: profile.name || "",
     });

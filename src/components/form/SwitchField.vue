@@ -6,14 +6,11 @@
     :vid="vid || $attrs.name"
     slim
   >
-    <v-select
-      ref="selectField"
+    <v-switch
       v-model="innerValue"
       :error-messages="errors"
-      :menu-props="{ offsetY: true }"
-      dense
-      filled
-      COMMENT2="Bind these last to enable overriding"
+      inset
+      COMMENT1="Bind these last to enable overriding"
       v-bind="$attrs"
       v-on="$listeners"
     />
@@ -36,14 +33,7 @@ import CommonField from "./CommonField";
     ValidationProvider,
   },
 })
-class SelectField extends CommonField {
-  /**
-   * Focus on the field
-   */
-  focus() {
-    return this.$refs.selectField.$refs.input.focus();
-  }
-}
+class SwitchField extends CommonField {}
 
-export default SelectField;
+export default SwitchField;
 </script>

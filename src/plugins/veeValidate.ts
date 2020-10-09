@@ -20,6 +20,11 @@ const VeeValidatePlugin = {
     // Only validate on blur OR every change if invalid
     setInteractionMode("eager");
 
+    // Checked check
+    extend("checked", {
+      message: "{_field_} must be selected",
+      validate: (value) => value === true,
+    });
     // Positive check
     extend("positive", (value) => value >= 0);
 

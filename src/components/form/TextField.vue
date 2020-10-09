@@ -28,7 +28,7 @@ import { ValidationProvider } from "vee-validate";
 import { Component } from "vue-property-decorator";
 
 // Utilities
-import CommonField from "./common";
+import CommonField from "./CommonField";
 
 /**
  * Vuetify wrapper (with validation)
