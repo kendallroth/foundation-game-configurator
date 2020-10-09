@@ -46,12 +46,12 @@ export default abstract class ProfileService {
 
   /**
    * Set the current profile
-   * @param profile - Profile code
+   * @param code - Profile code
    */
-  static setCurrentProfile(profile: string): void {
+  static setCurrentProfile(code: string): void {
     // TODO: See if there is any necessary cleanup before switching profiles???
 
-    storage.set("currentProfile", profile);
-    this.profileModule.setCurrentProfile(profile);
+    storage.set("currentProfile", code);
+    this.profileModule.setCurrentProfile(code);
   }
 }

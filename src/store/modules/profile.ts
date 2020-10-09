@@ -39,10 +39,10 @@ export default class ProfileModule extends VuexModule {
   }
 
   @Mutation
-  setCurrentProfile(name: string): void {
+  setCurrentProfile(code: string): void {
     // Only allow selecting valid profiles
-    if (!this.profileList.some((p) => p.code === name)) return;
+    if (!this.profileList.some((p) => p.code === code)) return;
 
-    this.currentProfileKey = name;
+    this.currentProfileKey = code;
   }
 }

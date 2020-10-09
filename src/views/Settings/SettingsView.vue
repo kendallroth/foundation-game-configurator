@@ -85,7 +85,7 @@ import { getModule } from "vuex-module-decorators";
 import { ExpandableSection } from "@components/layout";
 
 // Utilities
-import { SettingsService } from "@services";
+import { ProfileService, SettingsService } from "@services";
 import { SettingsModule } from "@store/modules";
 import Main from "@utilities/main";
 
@@ -125,6 +125,7 @@ export default class SettingsView extends Mixins(FormGuardMixin) {
   appClear(): void {
     this.isResettingApp = true;
     SettingsService.clearModPath();
+    ProfileService.setCurrentProfile("default");
 
     // DEBUG
     setTimeout(() => {

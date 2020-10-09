@@ -7,8 +7,29 @@
         </v-btn>
       </template>
     </TitleBar>
+    <ConfirmDialog
+      :value="Boolean(profileToSetCurrent)"
+      title="Change Current Profile"
+      @cancel="profileSetCurrentCancel"
+      @confirm="profileSetCurrent"
+    >
+      Are you sure you want to change the current profile?
+    </ConfirmDialog>
+    <ConfirmDialog
+      :value="Boolean(profileToDelete)"
+      title="Delete Profile"
+      @cancel="profileDeleteCancel"
+      @confirm="profileDelete"
+    >
+      Are you sure you want to delete this profile?
+    </ConfirmDialog>
     <v-card class="profiles">
-      <ProfileItem :profile="profileModule.defaultProfile" />
+      <ProfileItem
+        :changeable="false"
+        :profile="profileModule.defaultProfile"
+        @prompt-delete="profileDeletePrompt"
+        @set-default="profileSetCurrentPrompt"
+      />
       <v-divider class="mt-4" />
       <v-subheader>Custom Profiles</v-subheader>
       <fragment
@@ -16,7 +37,11 @@
         :key="profile.code"
       >
         <v-divider v-if="idx > 0" />
-        <ProfileItem :profile="profile" />
+        <ProfileItem
+          :profile="profile"
+          @prompt-delete="profileDeletePrompt"
+          @set-default="profileSetCurrentPrompt"
+        />
       </fragment>
       <div v-if="!Object.keys(customProfiles).length" class="text-body-1 px-4">
         There are no custom profiles!
@@ -33,9 +58,10 @@ import { getModule } from "vuex-module-decorators";
 import ProfileItem from "./ProfileItem.vue";
 
 // Types
-import { Profiles as ProfilesType } from "@typings/models";
+import { Profile, Profiles } from "@typings/models";
 
 // Utilities
+import { ProfileService } from "@services";
 import { ProfileModule } from "@store/modules";
 
 @Component({
@@ -45,12 +71,43 @@ import { ProfileModule } from "@store/modules";
 })
 export default class ProfilesView extends Vue {
   profileModule = getModule(ProfileModule, this.$store);
+  profileToSetCurrent: Profile | null = null;
+  profileToDelete: Profile | null = null;
 
   // NOTE: Default profile is manually rendered (to always be at top!)
-  get customProfiles(): ProfilesType {
+  get customProfiles(): Profiles {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { default: _, ...others } = this.profileModule.profiles;
     return others;
+  }
+
+  profileSetCurrent() {
+    if (!this.profileToSetCurrent) return;
+    ProfileService.setCurrentProfile(this.profileToSetCurrent.code);
+    this.profileToSetCurrent = null;
+  }
+
+  profileSetCurrentCancel() {
+    this.profileToSetCurrent = null;
+  }
+
+  profileSetCurrentPrompt(profile: Profile): void {
+    this.profileToSetCurrent = profile;
+  }
+
+  profileDelete(profile: Profile) {
+    if (!this.profileToDelete) return;
+    // TODO
+    this.$notifyWarning("Not implemented yet");
+    this.profileToDelete = null;
+  }
+
+  profileDeleteCancel() {
+    this.profileToDelete = null;
+  }
+
+  profileDeletePrompt(profile: Profile): void {
+    this.profileToDelete = profile;
   }
 }
 </script>

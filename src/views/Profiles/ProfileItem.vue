@@ -14,20 +14,27 @@
       </v-list-item-subtitle>
     </v-list-item-content>
     <v-list-item-action class="profile__actions">
+      <v-tooltip v-if="!profile.current" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon v-bind="attrs" v-on="on" @click="setDefault">
+            <v-icon>mdi-star</v-icon>
+          </v-btn>
+        </template>
+        <span>Make default</span>
+      </v-tooltip>
       <v-btn
-        v-if="!profile.current"
+        v-if="changeable"
+        :disabled="profile.current"
+        :to="`/profiles/${profile.code}`"
         icon
-        @click="$notifyWarning('Not implemented yet')"
       >
-        <v-icon color="primary">mdi-star</v-icon>
-      </v-btn>
-      <v-btn :disabled="profile.current" :to="`/profiles/${profile.code}`" icon>
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-btn
+        v-if="changeable"
         :disabled="profile.current"
         icon
-        @click="$notifyWarning('Not implemented yet')"
+        @click="promptDelete"
       >
         <v-icon color="red">mdi-delete</v-icon>
       </v-btn>
@@ -36,15 +43,34 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
+import { Component, Emit, Prop, Vue } from "vue-property-decorator";
 
 // Types
 import { Profile } from "@typings/models";
 
 @Component
 export default class ProfileItem extends Vue {
+  /**
+   * Whether profile is changeable (ie. not default)
+   */
+  @Prop({ default: true })
+  changeable!: boolean;
+
+  /**
+   * Profile
+   */
   @Prop({ required: true })
   profile!: Profile;
+
+  @Emit()
+  setDefault(): Profile {
+    return this.profile;
+  }
+
+  @Emit()
+  promptDelete(): Profile {
+    return this.profile;
+  }
 }
 </script>
 
