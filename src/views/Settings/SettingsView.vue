@@ -87,7 +87,7 @@ import { ExpandableSection } from "@components/layout";
 // Utilities
 import { SettingsService } from "@services";
 import { SettingsModule } from "@store/modules";
-import Background from "@utilities/background";
+import Main from "@utilities/main";
 
 const settingsFormFields: SettingsFields = {
   modPath: "",
@@ -148,7 +148,7 @@ export default class SettingsView extends Mixins(FormGuardMixin) {
   }
 
   async selectModDirectory(): Promise<void> {
-    const result = await Background.openFolderDialog();
+    const result = await Main.openFolderDialog();
     if (!result) return;
 
     this.settingsForm.setValues({ modPath: result });

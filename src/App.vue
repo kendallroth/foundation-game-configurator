@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <TheAppBar />
+    <TheAppBar :loading="isLoading" />
 
     <v-main class="app__main">
       <TheAppDrawer :loading="isLoading" />

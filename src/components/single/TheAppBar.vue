@@ -7,25 +7,27 @@
       Foundation Configurator
     </v-toolbar-title>
     <v-spacer />
-    <v-tooltip v-if="!settingsModule.hasModPath" bottom>
-      <template v-slot:activator="{ on, attrs }">
-        <v-icon class="mr-4" color="warning" v-bind="attrs" v-on="on">
-          mdi-folder-alert
-        </v-icon>
-      </template>
-      <span>No mod path</span>
-    </v-tooltip>
-    <v-chip color="primary" disabled outlined @click="() => {}">
-      <v-avatar left>
-        <v-icon>mdi-account-circle</v-icon>
-      </v-avatar>
-      {{ profileModule.profileName }}
-    </v-chip>
+    <template v-if="!loading">
+      <v-tooltip v-if="!settingsModule.hasModPath" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon class="mr-4" color="warning" v-bind="attrs" v-on="on">
+            mdi-folder-alert
+          </v-icon>
+        </template>
+        <span>No mod path</span>
+      </v-tooltip>
+      <v-chip color="primary" disabled outlined @click="() => {}">
+        <v-avatar left>
+          <v-icon>mdi-account-circle</v-icon>
+        </v-avatar>
+        {{ profileModule.profileName }}
+      </v-chip>
+    </template>
   </v-app-bar>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import { getModule } from "vuex-module-decorators";
 
 // Utilities
@@ -33,6 +35,9 @@ import { ProfileModule, SettingsModule } from "@store/modules";
 
 @Component
 export default class TheAppBar extends Vue {
+  @Prop({ default: false })
+  loading!: boolean;
+
   profileModule = getModule(ProfileModule, this.$store);
   settingsModule = getModule(SettingsModule, this.$store);
 }

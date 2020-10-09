@@ -1,18 +1,23 @@
 import { ipcRenderer } from "electron";
 
 // Types
+import { Profile } from "@models";
 import { AppPath } from "@typings";
 
 /**
  * Main process utilities
  */
-class Background {
+class Main {
   /**
    * Get the app data file path
    * @return App data file path
    */
   static async getPath(path: AppPath = "userData"): Promise<string> {
     return ipcRenderer.invoke("get-file-path", path);
+  }
+
+  static async getProfiles(): Promise<Profile[]> {
+    return ipcRenderer.invoke("load-profiles");
   }
 
   /**
@@ -24,4 +29,4 @@ class Background {
   }
 }
 
-export default Background;
+export default Main;
